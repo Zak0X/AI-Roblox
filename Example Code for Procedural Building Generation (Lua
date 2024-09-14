@@ -1,0 +1,12 @@
+local function GenerateBuilding(floors, width, depth)
+    local building = Instance.new("Model")
+    for floor = 1, floors do
+        local floorPart = Instance.new("Part")
+        floorPart.Size = Vector3.new(width, 1, depth)
+        floorPart.Position = Vector3.new(0, floor * 4, 0)
+        floorPart.Parent = building
+    end
+    return building
+end
+local newBuilding = GenerateBuilding(5, 10, 10)
+newBuilding.Parent = game.Workspace
