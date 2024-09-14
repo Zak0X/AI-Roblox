@@ -1,0 +1,19 @@
+local RunService = game:GetService("RunService")
+
+local function MonitorPerformance()
+    local fps = workspace:GetRealPhysicsFPS()
+    local memoryUsage = collectgarbage("count") / 1024  -- Memory in MB
+    local cpuUsage = game:GetService("Stats"):GetTotalMemoryUsageMb()
+
+    if fps < 30 then
+        warn("FPS drop detected! Consider optimizing physics calculations.")
+    end
+    if memoryUsage > 500 then
+        warn("High memory usage! Optimize textures and reduce asset complexity.")
+    end
+    if cpuUsage > 75 then
+        warn("High CPU usage! Review scripts for inefficient loops or processes.")
+    end
+end
+
+RunService.Heartbeat:Connect(MonitorPerformance)
