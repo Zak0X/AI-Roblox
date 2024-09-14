@@ -1,0 +1,8 @@
+local function inefficientLoop()
+    for i = 1, 100000 do
+        -- Example of an inefficient process
+        local result = math.random() * i
+    end
+end
+
+-- AI identifies this loop as inefficient and suggests optimization
