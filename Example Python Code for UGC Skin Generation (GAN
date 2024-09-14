@@ -1,0 +1,12 @@
+import torch
+from model import StyleGAN
+
+# Load pre-trained model for UGC skin generation
+model = StyleGAN.load_pretrained('skin_generator')
+
+# Generate new UGC skin
+latent_vector = torch.randn(1, 512)  # Random noise input for skin generation
+new_skin = model.generate(latent_vector)
+
+# Save and export the generated skin
+new_skin.save('ugc_sci_fi_armor.png')
