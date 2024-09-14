@@ -10,4 +10,32 @@ app = Flask(__name__)
 def log_performance():
     data = request.json
     statsd.gauge('game.fps', data['fps'])
-    statsd.g
+    statsd.gIt seems like the message got cut off, but I’ll finish outlining the integration steps and summarize everything in a final document for clarity.
+
+---
+
+### **5. Integrating Datadog or Sentry for Monitoring (continued)**
+
+You can log performance metrics such as **FPS** (frames per second), **memory usage**, and **CPU usage** from Roblox to Datadog or Sentry for better performance visibility:
+
+**Example for Logging Performance Data to Datadog**:
+```python
+from flask import Flask, request
+from datadog import initialize, statsd
+
+# Initialize Datadog with your API keys
+options = {'api_key': 'YOUR_API_KEY', 'app_key': 'YOUR_APP_KEY'}
+initialize(**options)
+
+app = Flask(__name__)
+
+@app.route('/log_performance', methods=['POST'])
+def log_performance():
+    data = request.json
+    # Send performance data to Datadog metrics
+    statsd.gauge('game.fps', data['fps'])
+    statsd.gauge('game.memory_usage', data['memory'])
+    return {"status": "logged"}, 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
