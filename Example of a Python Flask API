@@ -1,0 +1,13 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/log_performance', methods=['POST'])
+def log_performance():
+    data = request.json
+    # Handle performance data here
+    print(f"Received FPS: {data['fps']}, Memory: {data['memory']}")
+    return jsonify({"status": "Performance logged"}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
