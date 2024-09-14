@@ -1,0 +1,19 @@
+local HttpService = game:GetService("HttpService")
+
+local function sendPerformanceData(fps, memoryUsage, cpuUsage)
+    local url = "https://your-external-monitoring-service.com/performance"
+    local data = {
+        fps = fps,
+        memory = memoryUsage,
+        cpu = cpuUsage
+    }
+    local jsonData = HttpService:JSONEncode(data)
+
+    local success, response = pcall(function()
+        return HttpService:PostAsync(url, jsonData, Enum.HttpContentType.ApplicationJson)
+    end)
+
+    if not success then
+        warn("Error sending performance data: " .. response)
+    end
+end
