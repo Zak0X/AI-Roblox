@@ -1,0 +1,13 @@
+from flask import Flask, request
+from datadog import initialize, statsd
+
+options = {'api_key': 'YOUR_API_KEY', 'app_key': 'YOUR_APP_KEY'}
+initialize(**options)
+
+app = Flask(__name__)
+
+@app.route('/log_performance', methods=['POST'])
+def log_performance():
+    data = request.json
+    statsd.gauge('game.fps', data['fps'])
+    statsd.g
